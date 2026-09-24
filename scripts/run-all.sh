@@ -94,7 +94,7 @@ docker ps -a --filter name=webserver \
   --format 'table {{.Names}}\t{{.Status}}' \
   | tee "$EVIDENCE_DIR/11-status-exited.txt"
 
-event_end="$(date -u +%s)"
+event_end="$(( $(date -u +%s) + 2 ))"
 docker events --filter container=webserver --since "$event_start" --until "$event_end" \
   --format '{{.Time}}\t{{.Action}}\t{{.Actor.Attributes.name}}' \
   | tee "$EVIDENCE_DIR/12-events.txt"
